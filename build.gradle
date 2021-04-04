@@ -1,7 +1,8 @@
 
 buildscript {
     ext.cubaVersion = '7.2.13'
-    repositories {
+    repositories { 
+        mavenLocal()
         maven {
             url 'https://repo.cuba-platform.com/content/groups/work'
             credentials {
@@ -30,7 +31,12 @@ cuba {
     artifact {
         group = 'ru.artemaa.cuba.ghp'
         version = '0.1'
-        isSnapshot = true
+        isSnapshot = false
+    }
+    uploadRepository {
+        url = 'https://maven.pkg.github.com/mrartemaa/cuba-github-packages-publish'
+        user = System.getenv("GITHUB_ACTOR")
+        password = System.getenv("GITHUB_TOKEN")
     }
 }
 
@@ -44,6 +50,9 @@ configure([globalModule, coreModule, webModule]) {
     apply(plugin: 'java')
     apply(plugin: 'maven')
     apply(plugin: 'cuba')
+
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 
     dependencies {
             testCompile('org.junit.jupiter:junit-jupiter-api:5.5.2')
