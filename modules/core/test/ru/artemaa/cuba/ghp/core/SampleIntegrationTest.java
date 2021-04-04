@@ -14,6 +14,7 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 
 import java.util.List;
 
+@Disabled
 public class SampleIntegrationTest {
 
     @RegisterExtension
